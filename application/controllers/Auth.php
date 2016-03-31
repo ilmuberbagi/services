@@ -29,9 +29,8 @@ class Auth extends CI_Controller {
 			$err_number = 404;
 			
 			switch($kode){
-				case 1000: 
-					$query = $this->member->cekuser($datapost[0], $datapost[1]);
-				break;
+				case 1000: $query = $this->member->cekuser($datapost[0], $datapost[1]); break;
+				case 2000: $query = $this->member->get_privilage_user($datapost[0]); break;
 			}
 		}
 		$this->_formatjson($query);

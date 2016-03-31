@@ -17,12 +17,14 @@ class Mdl_member extends CI_Model{
 	public function cekuser($u, $p){
 		$user = str_replace(array("'",'"'),'', $u);
 		$pass = md5($p);
-		$sql = "select *, concat('IBF', sha1(member_username)) as ibf_token from ibf_member where (member_username = '$user' 
-				OR member_email = '$user') and member_password = '$pass'";
+		$sql = "select a.*, c.member_type, b.member_image_profile from ibf_member a 
+				left join ibf_member_detail b on a.member_id = b.member_id
+				left outer join ibf_member_type c on b.member_type = c.type_id 
+				where (a.member_username = '$user' OR a.member_email = '$user') and a.member_password = '$pass'";
 		return $this->db->query($sql)->result_array();
 	}
 	
-	public function detail_member($id){
+	public function detail_member_by_id($id){
 		$sql = "select * from ibf_member a 
 				left join ibf_member_detail b on a.member_id = b.member_id 
 				left outer join ibf_member_type c on b.member_type = c.type_id 
@@ -31,6 +33,18 @@ class Mdl_member extends CI_Model{
 		return $this->db->query($sql)->result_array();
 	}
 	
+	public function detail_member_by_code($id){
+		$sql = "select * from ibf_member a 
+				left join ibf_member_detail b on a.member_id = b.member_id 
+				left outer join ibf_member_type c on b.member_type = c.type_id 
+				left outer join ibf_region d on b.member_region = d.region_id 
+				where a.member_ibf_code = '$id'";
+		return $this->db->query($sql)->result_array();
+	}
 	
+	public function get_privilage_user($id){
+		$sql = "select * from ibf_privilage where member_id = '$id'";
+		return $this->db->query($sql)->result_array();
+	}
 
 }
