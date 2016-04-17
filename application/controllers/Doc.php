@@ -11,15 +11,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Doc extends CI_Controller {
 	
+	var $data = array();
 	
 	function __construct(){
 		parent::__construct();
 	}
 
 	public function index(){
-		$url = 'http://localhost/ibf/adminportal';
-		echo file_get_contents($url);
+		$this->data['title'] = 'API Service Ilmu Berbagi Foundation';
+		$this->data['page'] = 'page/home';
+		$this->load->view('template', $this->data);
 	}
 	
+	public function member(){
+		$this->data['title'] = 'API Service : Member';
+		$this->data['page'] = 'page/member';
+		$this->load->view('template', $this->data);
+	}
+	
+	public function article(){
+		$this->data['title'] = 'API Service : Member';
+		$this->data['page'] = 'page/member';
+		$this->load->view('template', $this->data);
+	}
 
 }

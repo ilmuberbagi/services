@@ -1,0 +1,59 @@
+/* 
+	create date : 29/03/2016
+	author : sabbana
+	custom style portal 
+*/
+
+.right-bg{
+	background:#FF4444;
+	color:#FFF;
+	vertical-align:middle;
+	min-height:100%;	
+}
+.jargon{
+	text-align:center;
+	font-family:impact;
+	text-shadow:2px 2px 0 #000;
+	font-size:3em;
+}
+.login{
+	background: url(../img/credit/nature.png) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+.bg-white{ 
+	background-color:#fff;
+	position:fixed;
+	top:0; right:0;
+	height:100%;
+	overflow:auto;
+	padding:20px;
+}
+.profile-user-img{
+	width:125px;
+	height:125px;
+}
+label > span{
+	color:#FF4444;
+}
+h5.title{
+	font-weight:bold;
+	padding-bottom:10px;
+	border-bottom:solid 2px #FF4444;
+}
+h1{
+	font-family:impact;
+}
+html, h1 > small{
+	font-family:"Source Sans Pro";
+}
+.content-img{
+	padding:2px;
+	margin-right:20px;
+	border:solid 1px #DDD;
+	background:#FFF;
+	float:left;
+	width:100px;
+}
