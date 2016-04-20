@@ -34,15 +34,29 @@ class Mdl_post extends CI_Model{
 	}
 
 	function get_article_by_category_name($param, $start, $offset){
-		$sql = "select a.article_title, b.category_name, a.article_content, c.member_name, a.article_id, a.article_date_update
+		$sql = "select a.article_title, b.category_name, a.article_content, c.member_name, a.article_id, a.article_date_update, 
+			a.article_image
 			from ibf_article a left join ibf_article_category b on a.article_category = b.category_id
 			left join ibf_member c on a.article_author = c.member_id
 			where b.category_name = '$param' order by a.article_date_update DESC limit ".$start.",".$offset;
 		if($param == "all"){
 			$sql = "select a.article_title, b.category_name, a.article_content, c.member_name, a.article_id, a.article_date_update
+				a.article_image
 				from ibf_article a left join ibf_article_category b on a.article_category = b.category_id
 				left join ibf_member c on a.article_author = c.member_id order by a.article_date_update DESC limit ".$start.",".$offset;
 		}
+		return $this->db->query($sql)->result_array();
+	}
+	
+	/**
+	 * detail article
+	 * @param : id
+	 * @return array
+	 */
+	public function get_detail_article($id){
+		$sql = "select a.*, b.category_name, c.member_name, a.article_image
+				from ibf_article a left join ibf_article_category b on a.article_category = b.category_id
+				left join ibf_member c on a.article_author = c.member_id where a.article_id = '$id'";
 		return $this->db->query($sql)->result_array();
 	}
 
