@@ -1,7 +1,7 @@
 <?php
 
 /*
-	author : sabbana azmi
+	author : sabbana azmi, ... , ...
 	created_date : 25-03-2016
 	services ilmu berbagi foundation
 */

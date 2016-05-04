@@ -15,7 +15,7 @@ class Article extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->model("Mdl_post","article");
-		$this->load->library('Lib_redis');
+		$this->load->library('Lib_redis');	
 	}
 
 	public function index(){
@@ -43,7 +43,21 @@ class Article extends CI_Controller {
 			}else
 				$res = $redis->get($key);
 		}
-		echo $res;
+		echo $this->_formatjson($res);
+	}
+	
+	
+	public function tag($param, $start=0, $offset=6){
+		$redis = $this->lib_redis->set_client(1);
+		$key = 'list:article:tag:'.$param;
+		if($redis->exists($key) == FALSE){
+			$data = $this->article->get_article_by_tag($param, $start, $offset);
+			$redis->set($key, json_encode($data));
+			$redis->expire($key, 120); # 2 minutes
+			$res = $redis->get($key);
+		}else
+			$res = $redis->get($key);
+		echo $this->_formatjson($res);
 	}
 	
 	public function read($id){
@@ -56,15 +70,28 @@ class Article extends CI_Controller {
 			$res = $redis->get($key);
 		}else
 			$res = $redis->get($key);
-		echo $res;
+		echo $this->_formatjson($res);
 	}
 	
+	public function comment(){
+		$query = null;
+		if(isset($_POST['api_kode']) && isset($_POST['api_datapost'])){
+			$kode 		= (int)preg_replace("/[^0-9]/", "", $_POST['api_kode']);
+			$datapost	= $_POST['api_datapost'];
+			$err_number = 404;
+			
+			switch($kode){
+				case 1000: $query = $this->article->post_comment($datapost); break;
+			}
+		}
+		$this->_formatjson($query);
+	}
 	
-	private function _formatjson($data = array()){
+	private function _formatjson($data){
 		header('Cache-Control: no-cache, must-revalidate');
 		header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 		header('Content-type: application/json');
-		echo json_encode($data);
+		echo $data;
 	}
 
 

@@ -9,7 +9,7 @@
  
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Post extends CI_Controller {
+class Activity extends CI_Controller {
 	
 	
 	function __construct(){

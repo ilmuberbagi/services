@@ -1,0 +1,23 @@
+Change Log API PORTAL IB:
+
+Aritikel:
+	- Get List article category
+		URL : http://services.ilmuberbagi.id/article/category
+		Method : GET
+		Return : json
+		
+	- Get List article base on category
+		URL : http://services.ilmuberbagi.id/article/[category_name]
+		Method : GET
+		Return : json
+		Example :
+			- Get list article on technology category
+				[] http://services.ilmuberbagi.id/article/teknologi
+				
+			Note:
+			for default url, the result will be limited 6 articles ordering date.
+			for custom result length, you can put paramater (start and/or offset) on url.
+				
+			- Get list aticle on news category with custom start offset
+				[0] http://services.ilmuberbagi.id/article/berita/[start]/[offset]
+				
