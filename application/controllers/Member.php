@@ -27,6 +27,7 @@ class Member extends CI_Controller {
 			switch($kode){
 				case 1000: $query = $this->member->detail_member_by_id($datapost[0]); break;
 				case 1001: $query = $this->member->detail_member_by_code($datapost[0]); break;
+				case 1002: $query = $this->member->detail_member_by_email($datapost[0]); break;
 			}
 		}
 		$this->_formatjson($query);

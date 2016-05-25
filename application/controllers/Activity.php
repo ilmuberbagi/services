@@ -17,7 +17,7 @@ class Activity extends CI_Controller {
 		$this->load->model("Mdl_post","mpost");
 	}
 
-	public function article($param){
+	public function index(){
 		$query = null;
 		switch($param){
 			case "all": $query = $this->mpost->get_all_article(); break;

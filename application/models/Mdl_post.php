@@ -74,5 +74,32 @@ class Mdl_post extends CI_Model{
 	public function post_comment($data){
 		return $this->db->insert('ibf_article_comment', $data);
 	}
+	
+	/* activity and agenda */
+	public function get_activity($id = ''){
+		$sql = "SELECT * from ibf_activity WHERE activity_date_end <= NOW()";
+		if($id != ''){
+			$sql = "SELECT * from ibf_activity where activity_id = '$id'";
+		}
+		return $this->db->query($sql)->result_array();
+	}
+
+	public function get_agenda($id = ''){
+		$sql = "SELECT * from ibf_activity WHERE activity_date_start >= NOW()";
+		if($id != ''){
+			$sql = "SELECT * from ibf_activity where activity_id = '$id'";
+		}
+		return $this->db->query($sql)->result_array();
+	}
+	
+	public function count_agenda(){
+		$sql = "SELECT * from ibf_activity WHERE activity_date_start >= NOW()";
+		return $this->db->query($sql)->num_rows();
+	}
+
+	public function count_activity(){
+		$sql = "SELECT * from ibf_activity WHERE activity_date_end <= NOW()";
+		return $this->db->query($sql)->num_rows();
+	}
 
 }

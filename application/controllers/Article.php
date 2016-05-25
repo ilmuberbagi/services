@@ -27,7 +27,10 @@ class Article extends CI_Controller {
 		if($param != ""){
 			$key = 'list:category:'.$param.':'.$start.':'.$offset;
 			if($redis->exists($key) == FALSE){
-				$data = $this->article->get_article_by_category_name($param, $start, $offset);
+				$data['data'] = $this->article->get_article_by_category_name($param, $start, $offset);
+				if(!empty($data['data']))
+					$data['status_code'] = '200';
+				
 				$redis->set($key, json_encode($data));
 				$redis->expire($key, 60); # 1 minute
 				$res = $redis->get($key);
@@ -36,7 +39,9 @@ class Article extends CI_Controller {
 		}else{
 			$key = 'list:category_article';
 			if($redis->exists($key) == FALSE){
-				$data = $this->article->get_category_article();
+				$data['data'] = $this->article->get_category_article();
+				if(!empty($data['data']))
+					$data['status_code'] = '200';
 				$redis->set($key, json_encode($data));
 				$redis->expire($key, 360); # 1 hour
 				$res = $redis->get($key);
@@ -51,7 +56,10 @@ class Article extends CI_Controller {
 		$redis = $this->lib_redis->set_client(1);
 		$key = 'list:article:tag:'.$param;
 		if($redis->exists($key) == FALSE){
-			$data = $this->article->get_article_by_tag($param, $start, $offset);
+			$data['data'] = $this->article->get_article_by_tag($param, $start, $offset);
+			if(!empty($data['data']))
+					$data['status_code'] = '200';
+				
 			$redis->set($key, json_encode($data));
 			$redis->expire($key, 120); # 2 minutes
 			$res = $redis->get($key);

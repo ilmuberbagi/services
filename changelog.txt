@@ -20,4 +20,8 @@ Aritikel:
 				
 			- Get list aticle on news category with custom start offset
 				[0] http://services.ilmuberbagi.id/article/berita/[start]/[offset]
+
 				
+Activity:
+	- Get activity => All activity which end date has pass away from current time
+	
